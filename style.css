@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Indie Flower', cursive;
+    background: #3f5264;
+    margin: 0;
+    padding: 0;
+}
+
+::selection {
+    background: transparent;
+}
+
+h4 {
+    font-size: 1.4rem;
+    line-height: 1.1;
+    font-family: 'Amatic SC', cursive;
+    margin: 1rem 0 0.5rem;
+}
+
+.color1 { color: #1BBC9B; } /* MOUNTAIN MEADOW */
+.color2 { color: #C0392B; } /* TALL POPPY */
+
+.card {
+    color: #013243; /* SHERPA BLUE */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(300px, 80vw);
+    height: min(400px, 60vh);
+    background: #e0e1dc;
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%) perspective(2000px);
+    box-shadow: inset 300px 0 50px rgba(0,0,0,.5), 20px 0 60px rgba(0,0,0,.5);
+    transition: transform 1s ease-in-out, box-shadow 1s ease-in-out;
+}
+
+.card:hover {
+    transform: translate(-50%, -50%) perspective(2000px) rotate(15deg) scale(1.2);
+    box-shadow: inset 20px 0 50px rgba(0,0,0,.5), 0 10px 100px rgba(0,0,0,.5);
+}
+
+.card.open {
+    transform: translate(-50%, -50%) perspective(2000px) rotate(15deg) scale(1.2);
+    box-shadow: inset 20px 0 50px rgba(0,0,0,.5), 0 10px 100px rgba(0,0,0,.5);
+}
+
+.card:before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: #BAC1BA;
+    transform-origin: bottom;
+    transform: skewX(-45deg);
+}
+
+.card:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -5px;
+    width: 5px;
+    height: 100%;
+    background: #92A29C;
+    transform-origin: left;
+    transform: skewY(-45deg);
+}
+
+.card .imgBox {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-origin: left;
+    transition: transform 0.7s ease-in-out;
+}
+
+.card .bark {
+    position: absolute;
+    background: #e0e1dc;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out;
+}
+
+.card .imgBox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card:hover .imgBox, .card.open .imgBox {
+    transform: rotateY(-135deg);
+}
+
+.card:hover .bark, .card.open .bark {
+    opacity: 1;
+    box-shadow: 300px 200px 100px rgba(0, 0, 0, .4) inset;
+}
+
+.card .details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 0 0 0 8px;
+    z-index: -1;
+    margin-top: 2.5rem;
+}
+
+.card.open .details {
+    z-index: 1; /* Ensure text is visible when card is open */
+}
+
+.card .details p {
+    font-size: 0.85rem;
+    line-height: 1.2;
+    transform: rotate(-5deg);
+    padding: 0 0 0 0.8rem;
+    margin: 0.3rem 0;
+}
+
+.card .details h4 {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+@media (max-width: 400px) {
+    .card {
+        width: min(250px, 90vw);
+        height: min(350px, 55vh);
+    }
+
+    h4 {
+        font-size: 1.2rem;
+    }
+
+    .card .details p {
+        font-size: 0.75rem;
+        line-height: 1.1;
+        padding: 0 0 0 0.6rem;
+    }
+
+    .card .details {
+        margin-top: 2rem;
+    }
+}
