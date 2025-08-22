@@ -37,11 +37,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('touchstart', playOnInteraction, { once: true, passive: true });
     });
 
-    // Show card and hide intro text after animation (2s)
+    // Show card and hide intro text after animation (4s)
     setTimeout(() => {
         card.classList.add('visible');
         introText.style.display = 'none';
-    }, 2000);
+    }, 4000); // Changed from 2000 to 4000 to match CSS animation duration
 
     let isToggling = false;
 
