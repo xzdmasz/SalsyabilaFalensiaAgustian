@@ -149,7 +149,7 @@ h4 {
     transform: translate(-50%, -50%);
     text-align: center;
     opacity: 0;
-    animation: fadeSlideUp 2s ease-in-out forwards;
+    animation: fadeSlideUp 4s ease-in-out forwards; /* Changed from 2s to 4s */
 }
 
 .intro-text h1 {
