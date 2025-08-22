@@ -7,9 +7,10 @@
 
 body {
     font-family: 'Indie Flower', cursive;
-    background: #3f5264;
+    background: #ffffff;
     margin: 0;
     padding: 0;
+    overflow: hidden; /* Prevent scroll during animation */
 }
 
 ::selection {
@@ -23,7 +24,7 @@ h4 {
     margin: 1rem 0 0.5rem;
 }
 
-.color1 { color: #1BBC9B; } /* MOUNTAIN MEADOW */
+.color1 { color: #C0392B; } /* MOUNTAIN MEADOW */
 .color2 { color: #C0392B; } /* TALL POPPY */
 
 .card {
@@ -37,12 +38,21 @@ h4 {
     transform-style: preserve-3d;
     transform: translate(-50%, -50%) perspective(2000px);
     box-shadow: inset 300px 0 50px rgba(0,0,0,.5), 20px 0 60px rgba(0,0,0,.5);
-    transition: transform 1s ease-in-out, box-shadow 1s ease-in-out;
+    transition: transform 1s ease-in-out, box-shadow 1s ease-in-out, opacity 0.5s ease-in-out;
+    cursor: pointer;
+    opacity: 0; /* Initially hidden */
 }
 
-.card:hover {
-    transform: translate(-50%, -50%) perspective(2000px) rotate(15deg) scale(1.2);
-    box-shadow: inset 20px 0 50px rgba(0,0,0,.5), 0 10px 100px rgba(0,0,0,.5);
+.card.visible {
+    opacity: 1; /* Visible after intro animation */
+}
+
+.card:focus {
+    outline-offset: 2px;
+}
+
+.card:active {
+    transform: translate(-50%, -50%) perspective(2000px) scale(0.98);
 }
 
 .card.open {
@@ -97,11 +107,11 @@ h4 {
     object-fit: cover;
 }
 
-.card:hover .imgBox, .card.open .imgBox {
+.card.open .imgBox {
     transform: rotateY(-135deg);
 }
 
-.card:hover .bark, .card.open .bark {
+.card.open .bark {
     opacity: 1;
     box-shadow: 300px 200px 100px rgba(0, 0, 0, .4) inset;
 }
@@ -117,7 +127,7 @@ h4 {
 }
 
 .card.open .details {
-    z-index: 1; /* Ensure text is visible when card is open */
+    z-index: 1;
 }
 
 .card .details p {
@@ -125,13 +135,45 @@ h4 {
     line-height: 1.2;
     transform: rotate(-5deg);
     padding: 0 0 0 0.8rem;
-    margin: 0.3rem 0;
+    margin: 0.5rem 0;
 }
 
 .card .details h4 {
     text-align: center;
 }
 
+.intro-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+    animation: fadeSlideUp 2s ease-in-out forwards;
+}
+
+.intro-text h1 {
+    font-family: 'Amatic SC', cursive;
+    font-size: 2rem;
+    color: #C0392B; /* Matches .color1 and .color2 */
+    margin: 0;
+    line-height: 1.2;
+}
+
+@keyframes fadeSlideUp {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -30%);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -70%);
+    }
+}
 
 @media (max-width: 400px) {
     .card {
@@ -151,5 +193,9 @@ h4 {
 
     .card .details {
         margin-top: 2rem;
+    }
+
+    .intro-text h1 {
+        font-size: 1.5rem;
     }
 }
